@@ -1,8 +1,7 @@
-import AddRecordForm from "../../components/admin/AddRecordForm";
-export default function admin() {
+export default function Admin() {
   return (
-    <div>
-      <AddRecordForm />
-    </div>
-  );
+    <>
+      <h1>Admin Page</h1>
+    </>
+  )
 }

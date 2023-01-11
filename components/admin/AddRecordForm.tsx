@@ -1,26 +1,21 @@
-import {
-  ChangeEvent,
-  MouseEventHandler,
-  SyntheticEvent,
-  useState,
-} from "react";
-function AddRecordForm() {
-  const [artistSearch, setArtistSearch] = useState("");
-  const [albumSearch, setAlbumSearch] = useState("");
-
-  function handleArtistChange(e: React.FormEvent<HTMLInputElement>) {
-    setArtistSearch(e.currentTarget.value);
-  }
-  function handleAlbumChange(e: React.FormEvent<HTMLInputElement>) {
-    setAlbumSearch(e.currentTarget.value);
-  }
-  function handleClick(e: MouseEvent) {
-    e.preventDefault();
-  }
+type Props = {
+  searchForAlbums: Function
+  handleArtistChange: React.ChangeEventHandler<HTMLInputElement>
+  handleAlbumChange: React.ChangeEventHandler<HTMLInputElement>
+  handleSearchClick: React.MouseEventHandler<HTMLButtonElement>
+  artistSearch: string | number | readonly string[] | undefined
+  albumSearch: string | number | readonly string[] | undefined
+}
+export default function AddRecordForm({
+  searchForAlbums,
+  handleArtistChange,
+  handleAlbumChange,
+  handleSearchClick,
+  artistSearch,
+  albumSearch,
+}: Props) {
   return (
     <div>
-      sanity check
-      <br />
       <input
         type="text"
         placeholder="Artist Name"
@@ -35,9 +30,7 @@ function AddRecordForm() {
         onChange={handleAlbumChange}
         className="shadow-md border border-solid"
       />
-      <button onClick={handleClick}>Search</button>
+      <button onClick={handleSearchClick}>Search</button>
     </div>
-  );
+  )
 }
-
-export default AddRecordForm;
