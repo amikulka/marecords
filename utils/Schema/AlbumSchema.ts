@@ -1,13 +1,18 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const AlbumSchema = new mongoose.Schema({
-  album_name: {
+  mbid: {
+    type: String,
+    required: [true, 'Needs mbid'],
+    trim: true,
+  },
+  album: {
     type: String,
     required: [true, 'Please add an album name'],
     trim: true,
     maxLength: [100, 'Album name can not be more than 100 characters'],
   },
-  artist_name: {
+  artist: {
     type: String,
     required: [true, 'Please add an artist name'],
     trim: true,
@@ -26,12 +31,5 @@ const AlbumSchema = new mongoose.Schema({
     required: [true],
   },
 })
-module.exports = mongoose.model('Album', AlbumSchema)
 
-// mbid: result.id,
-//         album: result.title,
-//         artist: result['artist-credit'][0].name,
-//         track_count: result['track-count'],
-//         disk_count: result.media.length,
-//         art_url
-//
+export default AlbumSchema
