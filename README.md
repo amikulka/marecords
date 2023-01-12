@@ -1,3 +1,19 @@
+
+## About
+
+As a part of the Hack-Reactor engineering immersive, I was tasked with the assignment of creating a minimally viable product within 2 days ( < 24 hrs ). This project is the result of that work. 
+
+It is a vinyl tracking app that accesses musicbrainz.org API for search results and stores the added album in a MongoDB database.
+
+Here is the full screen desktop app in action:
+<br>
+![MA-Full](https://user-images.githubusercontent.com/47989035/212138396-9fd83b2f-e897-4b2d-855d-99f7e082e6f2.gif)
+
+<br><br>
+And here it is on a mobile screen:
+<br>
+![MA-Mobile](https://user-images.githubusercontent.com/47989035/212138426-9d4f7e3a-464e-4455-8ab9-a4a5acddc7b2.gif)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -34,3 +50,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Google Lighthouse Result
+
+![Screenshot 2023-01-12 at 10 10 45 AM](https://user-images.githubusercontent.com/47989035/212134721-ab2071a3-97ae-410e-9d21-d856be9b41d9.png)
+
+
+<br>
+<b>*No user authentication has been put in place for this app*<b>
