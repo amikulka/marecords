@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { album } from './SearchResultsList'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import axios from 'axios'
 type Props = {
   album: album
@@ -35,10 +35,12 @@ export default function AlbumSearchCard({ album, handleAdd }: Props) {
   return (
     <div className="flex justify-center m-8">
       <div className="rounded-lg shadow-lg bg-white w-72 border-2 border-solid bg-slate-50">
-        <img
+        <Image
           className="rounded-t-lg border-b-2"
           src={albumUrl}
           alt="album artwork"
+          width={285}
+          height={285}
         />
         <div className="p-3">
           <h5 className="text-gray-900 text-xl font-medium mb-2">
