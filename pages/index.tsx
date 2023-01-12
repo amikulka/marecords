@@ -1,11 +1,21 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head'
+import Image from 'next/image'
+import { Inter } from '@next/font/google'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { server } from '../config'
+import { AlbumFullInfo } from '../utils/types'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [albumList, setAlbumList] = useState([])
+  useEffect(() => {
+    axios.get(`${server}/api/albums`).then((results) => {
+      setAlbumList(results.data.sort(sortAlphabetically))
+    })
+  }, [])
+
   return (
     <>
       <Head>
@@ -14,9 +24,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <main>
+        <h1 className="text-3xl font-bold underline">MA-Records</h1>
       </main>
     </>
-  );
+  )
+}
+
+function sortAlphabetically(a: AlbumFullInfo, b: AlbumFullInfo) {
+  return a.artist.toLowerCase().localeCompare(b.artist.toLowerCase())
 }

@@ -28,3 +28,14 @@ export interface noMbidTrack {
   length: number
   track_number: string
 }
+
+export interface AlbumFullInfo {
+  _id: string
+  mbid: string
+  album: string
+  artist: string
+  __v: number
+  disk_count: number
+  track_count: number
+  art_url: string
+}

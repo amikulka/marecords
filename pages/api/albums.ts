@@ -3,6 +3,8 @@ import addAlbum from '../../utils/addAlbum'
 import addTracks from '../../utils/addTracks'
 
 import { connect } from '../../utils/dbConnect'
+import removeAlbum from '../../utils/removeAlbum'
+import removeTracks from '../../utils/removeTracks'
 import { noMbidTrack, Album, ResponseFuncs } from '../../utils/types'
 
 export default async function handler(
@@ -19,13 +21,23 @@ export default async function handler(
       res.json(await Album.find({}).catch(catcher))
     },
     POST: async (req: NextApiRequest, res: NextApiResponse) => {
-      console.log(req.body)
       addAlbum(req.body)
         .then(() => {
           return addTracks(req.body.mbid)
         })
         .then(() => {
           res.json('Success')
+        })
+        .catch(catcher)
+    },
+    DELETE: async (req: NextApiRequest, res: NextApiResponse) => {
+      const mbid = req.query.mbid as string
+      removeAlbum(mbid)
+        .then(() => {
+          return removeTracks(mbid)
+        })
+        .then(() => {
+          res.json('Successfully Removed')
         })
         .catch(catcher)
     },

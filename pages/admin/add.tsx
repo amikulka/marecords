@@ -1,13 +1,20 @@
 import AddRecordForm from '../../components/admin/AddRecordForm'
-import SearchResultsList from '../../components/admin/SearchResultsList'
+import SearchResultsList, {
+  album,
+} from '../../components/admin/SearchResultsList'
 import ClearResultsButton from '../../components/admin/ClearResultsButton'
 import { useState } from 'react'
 import { server } from '../../config'
 import axios from 'axios'
+import SimpleNotification from '../../components/notification/SimpleNotification'
+import { Album } from '../../utils/types'
+
 export default function AddAlbum() {
   const [artistSearch, setArtistSearch] = useState('')
   const [albumSearch, setAlbumSearch] = useState('')
   const [albumSearchList, setAlbumSearchList] = useState(null)
+  const [show, setShow] = useState(false)
+
   function handleArtistChange(e: React.FormEvent<HTMLInputElement>) {
     setArtistSearch(e.currentTarget.value)
   }
@@ -23,6 +30,17 @@ export default function AddAlbum() {
     setAlbumSearchList(null)
     setArtistSearch('')
     setAlbumSearch('')
+  }
+  function handleAddAlbum(album: Album) {
+    axios.post(`${server}/api/albums`, album).then(() => {
+      setShow(true)
+      setTimeout(() => {
+        setShow(false)
+      }, 6000)
+      setArtistSearch('')
+      setAlbumSearch('')
+      setAlbumSearchList(null)
+    })
   }
 
   function searchForAlbums(artist: String, album: String) {
@@ -53,8 +71,17 @@ export default function AddAlbum() {
         <ClearResultsButton handleClearClick={handleClearClick} />
       )}
       {albumSearchList && (
-        <SearchResultsList albumSearchList={albumSearchList} />
+        <SearchResultsList
+          albumSearchList={albumSearchList}
+          handleAdd={handleAddAlbum}
+        />
       )}
+      <SimpleNotification
+        show={show}
+        setShow={setShow}
+        message={'Album Added!'}
+        description={'Album is now a part of your collection'}
+      />
     </div>
   )
 }

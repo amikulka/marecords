@@ -8,13 +8,17 @@ export interface album {
 }
 type Props = {
   albumSearchList: album[]
+  handleAdd: Function
 }
 
-export default function SearchResultsList({ albumSearchList }: Props) {
+export default function SearchResultsList({
+  albumSearchList,
+  handleAdd,
+}: Props) {
   return (
     <ul>
       {albumSearchList.map((album) => (
-        <AlbumSearchCard key={album.mbid} album={album} />
+        <AlbumSearchCard key={album.mbid} album={album} handleAdd={handleAdd} />
       ))}
     </ul>
   )
