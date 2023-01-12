@@ -8,14 +8,14 @@ import Head from 'next/head'
 export default function Admin() {
   const [albumList, setAlbumList] = useState([])
   useEffect(() => {
-    axios.get(`${server}/api/albums`).then((results) => {
+    axios.get(`/api/albums`).then((results) => {
       setAlbumList(results.data.sort(sortAlphabetically))
     })
   }, [])
 
   function handleRemove(album: AlbumFullInfo) {
     axios
-      .delete(`${server}/api/albums`, {
+      .delete(`/api/albums`, {
         params: {
           mbid: album.mbid,
         },

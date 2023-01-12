@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { album } from './SearchResultsList'
-import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { server } from '../../config'
 type Props = {
   album: album
   handleAdd: Function
@@ -13,7 +11,7 @@ export default function AlbumSearchCard({ album, handleAdd }: Props) {
   const [albumUrl, setAlbumUrl] = useState('')
   useEffect(() => {
     axios
-      .get(`${server}/api/mb_album_art`, {
+      .get(`/api/mb_album_art`, {
         params: {
           mbid: album.mbid,
         },

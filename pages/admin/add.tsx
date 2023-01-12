@@ -1,9 +1,6 @@
 import AddRecordForm from '../../components/admin/AddRecordForm'
-import SearchResultsList, {
-  album,
-} from '../../components/admin/SearchResultsList'
+import SearchResultsList from '../../components/admin/SearchResultsList'
 import { useState } from 'react'
-import { server } from '../../config'
 import axios from 'axios'
 import SimpleNotification from '../../components/notification/SimpleNotification'
 import { Album } from '../../utils/types'
@@ -32,7 +29,7 @@ export default function AddAlbum() {
     setAlbumSearch('')
   }
   function handleAddAlbum(album: Album) {
-    axios.post(`${server}/api/albums`, album).then(() => {
+    axios.post(`/api/albums`, album).then(() => {
       setShow(true)
       setTimeout(() => {
         setShow(false)
@@ -45,7 +42,7 @@ export default function AddAlbum() {
 
   function searchForAlbums(artist: String, album: String) {
     axios
-      .get(`${server}/api/mb_album_info`, {
+      .get(`/api/mb_album_info`, {
         params: {
           release: album,
           artist: artist,

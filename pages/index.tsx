@@ -1,9 +1,7 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { server } from '../config'
 import { AlbumFullInfo } from '../utils/types'
 import AlbumCard from '../components/home/AlbumCard'
 
@@ -12,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [albumList, setAlbumList] = useState([])
   useEffect(() => {
-    axios.get(`${server}/api/albums`).then((results) => {
+    axios.get(`/api/albums`).then((results) => {
       setAlbumList(results.data.sort(sortAlphabetically))
     })
   }, [])
