@@ -1,4 +1,5 @@
 import InputWithLabel from '../input/InputWithLabel'
+import StyledButton from './StyledButton'
 
 type Props = {
   searchForAlbums: Function
@@ -7,6 +8,8 @@ type Props = {
   handleSearchClick: React.MouseEventHandler<HTMLButtonElement>
   artistSearch: string
   albumSearch: string
+  albumSearchList: any[] | null
+  handleClearClick: React.MouseEventHandler<HTMLButtonElement>
 }
 export default function AddRecordForm({
   handleArtistChange,
@@ -14,10 +17,12 @@ export default function AddRecordForm({
   handleSearchClick,
   artistSearch,
   albumSearch,
+  albumSearchList,
+  handleClearClick,
 }: Props) {
   return (
-    <div className="p-1">
-      <div className="max-w-xs mt-2.5">
+    <div className="ml-10 mt-8">
+      <div className="max-w-xs p-2.5">
         <InputWithLabel
           label={'Artist'}
           placeholder={'Artist name'}
@@ -25,7 +30,7 @@ export default function AddRecordForm({
           query={artistSearch}
         />
       </div>
-      <div className="max-w-xs mt-2.5">
+      <div className="max-w-xs p-2.5">
         <InputWithLabel
           label={'Album'}
           placeholder={'Album name'}
@@ -33,12 +38,15 @@ export default function AddRecordForm({
           query={albumSearch}
         />
       </div>
-      <button
-        className="mt-2.5 inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
-        onClick={handleSearchClick}
-      >
-        Search
-      </button>
+      <div>
+        <StyledButton handleClick={handleSearchClick} label={'Search'} />
+        {albumSearchList && (
+          <StyledButton
+            handleClick={handleClearClick}
+            label={'Clear Results'}
+          />
+        )}
+      </div>
     </div>
   )
 }

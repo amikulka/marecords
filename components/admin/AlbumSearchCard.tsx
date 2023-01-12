@@ -35,31 +35,27 @@ export default function AlbumSearchCard({ album, handleAdd }: Props) {
   }
 
   return (
-    <div className="bg-white shadow sm:rounded-lg">
-      <div className="sm:flex">
-        <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
-          {albumUrl && (
-            <img
-              className="h-32 w-32 border border-gray-300"
-              src={albumUrl}
-              alt="album artwork"
-            />
-          )}
-        </div>
-        <div>
-          <h3 className="text-md font-medium leading-6 text-gray-900">
+    <div className="flex justify-center m-8">
+      <div className="rounded-lg shadow-lg bg-white w-72 border-2 border-solid bg-slate-50">
+        <img
+          className="rounded-t-lg border-b-2"
+          src={albumUrl}
+          alt="album artwork"
+        />
+        <div className="p-3">
+          <h5 className="text-gray-900 text-xl font-medium mb-2">
             {album.album}
-          </h3>
-          <h2>{album.artist}</h2>
-          <p>Record count: {album.disk_count}</p>
-          <p>Track count: {album.track_count}</p>
-        </div>
-        <div>
+          </h5>
+          <p className="text-gray-700 text-base mb-4">{album.artist}</p>
+          <div className="flex justify-between">
+            <p>Tracks: {album.track_count}</p>
+            <p>Records: {album.disk_count}</p>
+          </div>
           <button
-            className="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="mt-5 w-full text-center rounded border border-transparent bg-green-700 px-0 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-slate-600 focus:outline-none focus:ring-1 focus:ring-slate-500 focus:ring-offset-1"
             onClick={handleAddClick}
           >
-            Add Album
+            Add
           </button>
         </div>
       </div>

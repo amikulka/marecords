@@ -2,12 +2,12 @@ import AddRecordForm from '../../components/admin/AddRecordForm'
 import SearchResultsList, {
   album,
 } from '../../components/admin/SearchResultsList'
-import ClearResultsButton from '../../components/admin/ClearResultsButton'
 import { useState } from 'react'
 import { server } from '../../config'
 import axios from 'axios'
 import SimpleNotification from '../../components/notification/SimpleNotification'
 import { Album } from '../../utils/types'
+import Head from 'next/head'
 
 export default function AddAlbum() {
   const [artistSearch, setArtistSearch] = useState('')
@@ -57,31 +57,38 @@ export default function AddAlbum() {
       })
   }
   return (
-    <div>
-      <h1>Add Record</h1>
-      <AddRecordForm
-        searchForAlbums={searchForAlbums}
-        handleArtistChange={handleArtistChange}
-        handleAlbumChange={handleAlbumChange}
-        handleSearchClick={handleSearchClick}
-        artistSearch={artistSearch}
-        albumSearch={albumSearch}
-      />
-      {albumSearchList && (
-        <ClearResultsButton handleClearClick={handleClearClick} />
-      )}
-      {albumSearchList && (
-        <SearchResultsList
+    <>
+      <Head>
+        <title>MA-Add</title>
+        <meta name="description" content="Adds records to the list" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <div>
+        <AddRecordForm
+          searchForAlbums={searchForAlbums}
+          handleArtistChange={handleArtistChange}
+          handleAlbumChange={handleAlbumChange}
+          handleSearchClick={handleSearchClick}
+          artistSearch={artistSearch}
+          albumSearch={albumSearch}
           albumSearchList={albumSearchList}
-          handleAdd={handleAddAlbum}
+          handleClearClick={handleClearClick}
         />
-      )}
-      <SimpleNotification
-        show={show}
-        setShow={setShow}
-        message={'Album Added!'}
-        description={'Album is now a part of your collection'}
-      />
-    </div>
+
+        {albumSearchList && (
+          <SearchResultsList
+            albumSearchList={albumSearchList}
+            handleAdd={handleAddAlbum}
+          />
+        )}
+        <SimpleNotification
+          show={show}
+          setShow={setShow}
+          message={'Album Added!'}
+          description={'Album is now a part of your collection'}
+        />
+      </div>
+    </>
   )
 }

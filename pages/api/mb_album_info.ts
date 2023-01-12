@@ -23,7 +23,7 @@ function getAlbumInfo(queries: object) {
     headers: headers,
     params: {
       query: queryString,
-      limit: 5,
+      limit: 10,
     },
   }).then((result) => {
     return result.data.releases.map((result: any) => {

@@ -16,10 +16,10 @@ export default function SearchResultsList({
   handleAdd,
 }: Props) {
   return (
-    <ul>
+    <div className="flex justify-center md:justify-start flex-wrap">
       {albumSearchList.map((album) => (
         <AlbumSearchCard key={album.mbid} album={album} handleAdd={handleAdd} />
       ))}
-    </ul>
+    </div>
   )
 }
