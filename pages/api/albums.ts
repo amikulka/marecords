@@ -5,7 +5,7 @@ import addTracks from '../../utils/addTracks'
 import { connect } from '../../utils/dbConnect'
 import removeAlbum from '../../utils/removeAlbum'
 import removeTracks from '../../utils/removeTracks'
-import { noMbidTrack, Album, ResponseFuncs } from '../../utils/types'
+import { ResponseFuncs } from '../../utils/types'
 
 export default async function handler(
   req: NextApiRequest,
