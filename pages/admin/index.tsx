@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { server } from '../../config'
 import { AlbumFullInfo } from '../../utils/types'
 import AdminAlbumCard from '../../components/admin/AdminAlbumCard'
 import Head from 'next/head'
