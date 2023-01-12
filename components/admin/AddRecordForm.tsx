@@ -1,43 +1,52 @@
-import {
-  ChangeEvent,
-  MouseEventHandler,
-  SyntheticEvent,
-  useState,
-} from "react";
-function AddRecordForm() {
-  const [artistSearch, setArtistSearch] = useState("");
-  const [albumSearch, setAlbumSearch] = useState("");
+import InputWithLabel from '../input/InputWithLabel'
+import StyledButton from './StyledButton'
 
-  function handleArtistChange(e: React.FormEvent<HTMLInputElement>) {
-    setArtistSearch(e.currentTarget.value);
-  }
-  function handleAlbumChange(e: React.FormEvent<HTMLInputElement>) {
-    setAlbumSearch(e.currentTarget.value);
-  }
-  function handleClick(e: MouseEvent) {
-    e.preventDefault();
-  }
-  return (
-    <div>
-      sanity check
-      <br />
-      <input
-        type="text"
-        placeholder="Artist Name"
-        value={artistSearch}
-        onChange={handleArtistChange}
-        className="shadow-md border border-solid"
-      />
-      <input
-        type="text"
-        placeholder="Album Name"
-        value={albumSearch}
-        onChange={handleAlbumChange}
-        className="shadow-md border border-solid"
-      />
-      <button onClick={handleClick}>Search</button>
-    </div>
-  );
+type Props = {
+  searchForAlbums: Function
+  handleArtistChange: React.ChangeEventHandler<HTMLInputElement>
+  handleAlbumChange: React.ChangeEventHandler<HTMLInputElement>
+  handleSearchClick: React.MouseEventHandler<HTMLButtonElement>
+  artistSearch: string
+  albumSearch: string
+  albumSearchList: any[] | null
+  handleClearClick: React.MouseEventHandler<HTMLButtonElement>
 }
-
-export default AddRecordForm;
+export default function AddRecordForm({
+  handleArtistChange,
+  handleAlbumChange,
+  handleSearchClick,
+  artistSearch,
+  albumSearch,
+  albumSearchList,
+  handleClearClick,
+}: Props) {
+  return (
+    <div className="ml-10 mt-8">
+      <div className="max-w-xs p-2.5">
+        <InputWithLabel
+          label={'Artist'}
+          placeholder={'Artist name'}
+          handleChange={handleArtistChange}
+          query={artistSearch}
+        />
+      </div>
+      <div className="max-w-xs p-2.5">
+        <InputWithLabel
+          label={'Album'}
+          placeholder={'Album name'}
+          handleChange={handleAlbumChange}
+          query={albumSearch}
+        />
+      </div>
+      <div>
+        <StyledButton handleClick={handleSearchClick} label={'Search'} />
+        {albumSearchList && (
+          <StyledButton
+            handleClick={handleClearClick}
+            label={'Clear Results'}
+          />
+        )}
+      </div>
+    </div>
+  )
+}

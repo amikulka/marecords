@@ -1,23 +1,23 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import axios from "axios";
+import type { NextApiRequest, NextApiResponse } from 'next'
+import axios from 'axios'
 
 const headers = {
-  Accept: "application/json",
-  "User-Agent": "MBRecords/0.1.0 (mikujen@yahoo.com)",
-};
+  Accept: 'application/json',
+  'User-Agent': 'MBRecords/0.1.0 (mikujen@yahoo.com)',
+}
 
 interface disk {
-  tracks: any;
+  tracks: any
 }
 
 function getTracks(mbid: string) {
-  let endpoint = `http://musicbrainz.org/ws/2/release/${mbid}`;
+  let endpoint = `http://musicbrainz.org/ws/2/release/${mbid}`
   return axios({
-    method: "get",
+    method: 'get',
     url: endpoint,
     headers: headers,
     params: {
-      inc: "recordings",
+      inc: 'recordings',
     },
   }).then((results) => {
     return results.data.media.map((disk: disk) => {
@@ -27,28 +27,28 @@ function getTracks(mbid: string) {
           position: track.position,
           length: track.length,
           track_number: track.number,
-        };
-      });
-    });
-  });
+        }
+      })
+    })
+  })
 }
 type Data = {
-  title: String;
-  position: Number;
-  length: Number;
-  track_number: String;
-};
+  title: String
+  position: Number
+  length: Number
+  track_number: String
+}
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data[][]>
 ) {
-  const mbid = req.body.mbid;
-  getTracks(mbid)
+  const mbid = req.query.mbid
+  getTracks(mbid as string)
     .then((data) => {
-      res.send(data);
+      res.send(data.flat())
     })
     .catch((err) => {
-      console.log(err);
-      res.status(400).send(err);
-    });
+      console.log(err)
+      res.status(400).send(err)
+    })
 }
