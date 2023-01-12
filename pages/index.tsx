@@ -24,7 +24,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="flex flex-wrap justify-center">
+        <div className="flex justify-center md:justify-start flex-wrap">
           {albumList ? (
             albumList.map((album: AlbumFullInfo) => (
               <AlbumCard album={album} key={album.mbid} />
